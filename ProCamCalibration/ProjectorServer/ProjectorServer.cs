@@ -102,8 +102,14 @@ namespace RoomAliveToolkit
             // discovery
             serviceHost.Description.Behaviors.Add(new ServiceDiscoveryBehavior());
             serviceHost.AddServiceEndpoint(new UdpDiscoveryEndpoint());
-
             serviceHost.Open();
+
+            //add information about endpoints which are open 
+            foreach (var endpoint in serviceHost.Description.Endpoints)
+            {
+                Console.WriteLine("Listening on Uri - {0}\n", endpoint.ListenUri);
+            }
+
             Application.Run(projectorServerForm);
         }
     }
